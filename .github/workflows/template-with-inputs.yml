@@ -23,7 +23,7 @@ jobs:
 
   Apply:
     name: Apply
-    if: github.event_name == 'push' && inputs.DRY_RUN == 'false'
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && inputs.DRY_RUN == 'false'
     needs: [Plan]
     runs-on: ubuntu-latest
     steps:
