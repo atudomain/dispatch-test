@@ -1,0 +1,20 @@
+name: workflow dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      DRY_RUN:
+        type: boolean
+        description: 'If true, apply will not be run after plan.'
+        default: true
+  pull_request:
+  push:
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+jobs:
+  whatever:
+    name: Whatever
+    uses: ./.github/workflows/template-with-inputs.yml
+    with:
+      DRY_RUN: ${{ inputs.DRY_RUN || 'false' }}

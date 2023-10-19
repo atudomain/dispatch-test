@@ -1,0 +1,31 @@
+name: template workflow with inputs
+on:
+  workflow_call:
+    inputs:
+      DRY_RUN:
+        type: string
+        default: 'false'
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
+jobs:
+  Plan:
+    name: Plan
+    runs-on: ubuntu
+    steps:
+      - name: Print inputs
+        run: |
+          echo "-->${{ inputs.DRY_RUN }}<--"
+
+  Apply:
+    name: Apply
+    if: github.event_name == 'push' && inputs.DRY_RUN == 'false'
+    needs: [Plan]
+    runs-on: ubuntu
+    steps:
+      - name: Print inputs
+        run: |
+          echo "-->${{ inputs.DRY_RUN }}<--"
