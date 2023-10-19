@@ -18,6 +18,7 @@ jobs:
     steps:
       - name: Print inputs
         run: |
+          echo "-->${{ github.event_name }}<--"
           echo "-->${{ inputs.DRY_RUN }}<--"
 
   Apply:
