@@ -14,7 +14,7 @@ permissions:
 jobs:
   Plan:
     name: Plan
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     steps:
       - name: Print inputs
         run: |
@@ -24,7 +24,7 @@ jobs:
     name: Apply
     if: github.event_name == 'push' && inputs.DRY_RUN == 'false'
     needs: [Plan]
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     steps:
       - name: Print inputs
         run: |
